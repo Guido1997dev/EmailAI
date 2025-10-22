@@ -11,7 +11,7 @@ export async function POST() {
   const session = await stripe.billingPortal.sessions.create({
     customer_email: auth.user.email || undefined,
     return_url: `${origin}/dashboard/billing`,
-  } as Stripe.BillingPortal.Session.CreateParams);
+  });
 
   if (!session.url) return new Response("No portal URL", { status: 500 });
   return Response.redirect(session.url, 303);
