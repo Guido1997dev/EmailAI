@@ -28,6 +28,9 @@
   
   // For opening webapp reference emails page
   const APP_URL = PRODUCTION_URL;
+  
+  // API endpoints (use /api/generate for better CORS handling)
+  const GENERATE_EMAIL_URL = `${API_BASE_URL}/api/generate`;
 
   function mountSidebar() {
     if (document.getElementById(SIDEBAR_ID)) return;
@@ -184,7 +187,7 @@
           isReply: emailContext.isReply
         };
 
-        const response = await fetchWithFallback(`${API_BASE_URL}/api/generateMail`, {
+        const response = await fetchWithFallback(`${GENERATE_EMAIL_URL}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ context: JSON.stringify(fullContext) })
@@ -373,7 +376,7 @@
 })();
 
 // Development/local API endpoint
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://localhost:3000/api/generate';
 
 console.log('🚀 MailSprint content.js loaded!', window.location.href);
 
@@ -462,7 +465,7 @@ function showOverlay(dialog, bodyDiv) {
         threadContext: emailContext.threadContext
       };
 
-      const response = await fetchWithFallback(`${API_URL}/api/generateMail`, {
+      const response = await fetchWithFallback(`${API_URL}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ context: JSON.stringify(fullContext) })
