@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+MailSprint AI — SaaS boilerplate (Next.js 14, Supabase, Stripe, OpenAI)
 
-## Getting Started
+Quickstart
 
-First, run the development server:
+1. Copy env variables
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Fill required keys (Supabase, Stripe, OpenAI), then run dev
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Supabase
 
-## Learn More
+- Create a project, get `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY`.
+- SQL (profiles table):
 
-To learn more about Next.js, take a look at the following resources:
+```
+create table if not exists public.profiles (
+  id uuid primary key references auth.users(id) on delete cascade,
+  tone_of_voice text,
+  is_pro boolean default false,
+  updated_at timestamp with time zone default now()
+);
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+alter table public.profiles enable row level security;
+create policy "profiles read" on public.profiles for select using ( auth.uid() = id );
+create policy "profiles upsert" on public.profiles for insert with check ( auth.uid() = id );
+create policy "profiles update" on public.profiles for update using ( auth.uid() = id );
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Stripe
 
-## Deploy on Vercel
+- Create a Product + Price (recurring). Put price id in `STRIPE_PRICE_ID_PRO`.
+- Set `STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`.
+- Create webhook endpoint pointing to `/api/stripe/webhook` and set `STRIPE_WEBHOOK_SECRET`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+OpenAI
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Add `OPENAI_API_KEY`.
+
+Routes
+
+- `/` marketing landing
+- `/auth` Supabase auth
+- `/dashboard` settings + test
+- `/dashboard/billing` upgrade and portal
+- `/api/generateMail` LLM email generation
+- `/api/stripe/*` Stripe checkout, portal, webhook
+
+Chrome extension (Gmail sidebar)
+
+1. Go to `chrome://extensions`, toggle Developer Mode.
+2. Click "Load unpacked" and select the `extension/` folder.
+3. Open Gmail and press Command+M (Mac) / Ctrl+M (Windows) to toggle the overlay.
+4. The panel loads from your app at `/panel` so your login session is reused. If it says you’re not logged in, visit your local app (e.g. `http://localhost:3000`) and sign in, then toggle again.
+5. Click “Laad context” to fetch the current conversation content; generate; “Plak in Gmail” inserts into the reply editor.

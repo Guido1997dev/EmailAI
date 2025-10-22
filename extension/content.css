@@ -1,0 +1,468 @@
+#mailsprint-sidebar-container {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  width: 420px !important;
+  max-width: 90vw !important;
+  height: 100vh !important;
+  z-index: 2147483647 !important;
+  pointer-events: none !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif !important;
+}
+
+#mailsprint-sidebar-panel {
+  pointer-events: auto !important;
+  height: 100% !important;
+  background: #ffffff !important;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+/* Sidebar Header */
+.mailsprint-sidebar-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 20px 24px !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  background: #ffffff !important;
+}
+
+.mailsprint-sidebar-logo {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  color: #111827 !important;
+}
+
+.mailsprint-sidebar-close {
+  background: none !important;
+  border: none !important;
+  font-size: 24px !important;
+  color: #6b7280 !important;
+  cursor: pointer !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 6px !important;
+  transition: all 0.2s !important;
+}
+
+.mailsprint-sidebar-close:hover {
+  background: #f3f4f6 !important;
+  color: #111827 !important;
+}
+
+/* Sidebar Content */
+.mailsprint-sidebar-content {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  padding: 20px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
+}
+
+/* Sections */
+.mailsprint-section {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+.mailsprint-section-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  position: relative !important;
+}
+
+.mailsprint-section-icon {
+  font-size: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.mailsprint-section-title {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #374151 !important;
+  flex: 1 !important;
+}
+
+.mailsprint-refresh-btn {
+  background: none !important;
+  border: 1px solid #e5e7eb !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  color: #6b7280 !important;
+  transition: all 0.2s !important;
+}
+
+.mailsprint-refresh-btn:hover {
+  background: #f3f4f6 !important;
+  color: #111827 !important;
+}
+
+/* Textarea */
+.mailsprint-textarea {
+  width: 100% !important;
+  padding: 12px !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  font-family: inherit !important;
+  resize: vertical !important;
+  transition: border-color 0.2s !important;
+  background: #ffffff !important;
+  color: #111827 !important;
+  line-height: 1.5 !important;
+}
+
+.mailsprint-textarea:focus {
+  outline: none !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+.mailsprint-textarea::placeholder {
+  color: #9ca3af !important;
+}
+
+/* Analysis Section */
+.mailsprint-analysis {
+  min-height: 120px !important;
+}
+
+.mailsprint-context-card {
+  background: #f9fafb !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+.mailsprint-context-item {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+}
+
+.mailsprint-context-label {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #6b7280 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.mailsprint-context-value {
+  font-size: 13px !important;
+  color: #111827 !important;
+  font-weight: 500 !important;
+}
+
+.mailsprint-context-text {
+  font-size: 13px !important;
+  color: #374151 !important;
+  line-height: 1.5 !important;
+  padding: 8px !important;
+  background: #ffffff !important;
+  border-radius: 6px !important;
+  border-left: 3px solid #3b82f6 !important;
+}
+
+/* Empty State */
+.mailsprint-empty-state {
+  text-align: center !important;
+  padding: 32px 16px !important;
+  color: #9ca3af !important;
+}
+
+.mailsprint-empty-icon {
+  font-size: 32px !important;
+  display: block !important;
+  margin-bottom: 12px !important;
+  opacity: 0.5 !important;
+}
+
+.mailsprint-empty-state p {
+  margin: 0 0 8px 0 !important;
+  font-size: 14px !important;
+  color: #6b7280 !important;
+}
+
+.mailsprint-empty-hint {
+  font-size: 12px !important;
+  color: #9ca3af !important;
+}
+
+/* Output Section */
+.mailsprint-output {
+  min-height: 150px !important;
+}
+
+.mailsprint-generated-email {
+  background: #f9fafb !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+}
+
+.mailsprint-email-text {
+  margin: 0 !important;
+  font-size: 13px !important;
+  color: #111827 !important;
+  line-height: 1.6 !important;
+  white-space: pre-wrap !important;
+  font-family: inherit !important;
+}
+
+.mailsprint-error {
+  background: #fef2f2 !important;
+  border: 1px solid #fecaca !important;
+  border-radius: 8px !important;
+  padding: 16px !important;
+  text-align: center !important;
+}
+
+.mailsprint-error-icon {
+  font-size: 24px !important;
+  display: block !important;
+  margin-bottom: 8px !important;
+}
+
+.mailsprint-error p {
+  margin: 0 !important;
+  font-size: 13px !important;
+  color: #991b1b !important;
+}
+
+/* Actions */
+.mailsprint-sidebar-actions {
+  display: flex !important;
+  gap: 12px !important;
+  padding: 20px 24px !important;
+  border-top: 1px solid #e5e7eb !important;
+  background: #ffffff !important;
+}
+
+.mailsprint-btn {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+  border: none !important;
+  font-family: inherit !important;
+}
+
+.mailsprint-btn-primary {
+  background: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+.mailsprint-btn-primary:hover {
+  background: #2563eb !important;
+}
+
+.mailsprint-btn-primary:disabled {
+  background: #93c5fd !important;
+  cursor: not-allowed !important;
+}
+
+.mailsprint-btn-secondary {
+  background: #f3f4f6 !important;
+  color: #374151 !important;
+  border: 1px solid #d1d5db !important;
+}
+
+.mailsprint-btn-secondary:hover {
+  background: #e5e7eb !important;
+}
+
+.mailsprint-btn-icon {
+  font-size: 16px !important;
+}
+.mailsprint-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  margin-left: 8px;
+  background: #171717;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: background 0.2s;
+}
+
+.mailsprint-button:hover {
+  background: #404040;
+}
+
+.mailsprint-button:disabled {
+  background: #a3a3a3;
+  cursor: not-allowed;
+}
+
+.mailsprint-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(4px);
+}
+
+.mailsprint-modal {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: mailsprint-fadein 0.2s ease-out;
+}
+
+@keyframes mailsprint-fadein {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.mailsprint-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.mailsprint-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #171717;
+}
+
+.mailsprint-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #737373;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.mailsprint-close:hover {
+  background: #f5f5f5;
+  color: #171717;
+}
+
+.mailsprint-context {
+  background: #f9fafb;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #525252;
+  margin-bottom: 16px;
+  white-space: pre-wrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  border-left: 3px solid #d4d4d4;
+}
+
+.mailsprint-input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e5e5e5;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  resize: vertical;
+  margin-bottom: 16px;
+  transition: border-color 0.2s;
+}
+
+.mailsprint-input:focus {
+  outline: none;
+  border-color: #171717;
+}
+
+.mailsprint-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.mailsprint-cancel,
+.mailsprint-generate {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: all 0.2s;
+  border: none;
+}
+
+.mailsprint-cancel {
+  background: #f5f5f5;
+  color: #525252;
+}
+
+.mailsprint-cancel:hover {
+  background: #e5e5e5;
+}
+
+.mailsprint-generate {
+  background: #171717;
+  color: white;
+}
+
+.mailsprint-generate:hover {
+  background: #404040;
+}
+
+.mailsprint-loading {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #737373;
+}
