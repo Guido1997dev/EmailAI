@@ -1,7 +1,7 @@
 (function () {
   const SIDEBAR_ID = 'mailsprint-sidebar-container';
   // Deployed app base URL (no trailing slash). Update after deploying to Vercel.
-  const APP_URL = 'https://your-vercel-domain';
+  const APP_URL = 'https://email-ai-git-main-guido1997devs-projects.vercel.app';
 
   function mountSidebar() {
     if (document.getElementById(SIDEBAR_ID)) return;
