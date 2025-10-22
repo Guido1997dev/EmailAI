@@ -37,7 +37,7 @@ export default function PanelPage() {
       if (!res.ok) throw new Error(`${res.status}`);
       const json = await res.json();
       setResult(json.email || "");
-    } catch (_) {
+    } catch {
       setResult("Kon geen e-mail genereren. Log in op MailSprint en probeer opnieuw.");
     } finally {
       setLoading(false);
