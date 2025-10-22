@@ -4,13 +4,20 @@ import type { Stripe } from "stripe";
 import { getSupabaseAdminClient } from "@/lib/supabase/admin";
 
 export async function POST(req: Request) {
-  const sig = headers().get("stripe-signature");
+  const headersList = await headers();
+  const sig = headersList.get("stripe-signature");
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
   const body = await req.text();
 
+  // TODO: Implement Stripe webhook verification and processing
+  // For now, return success to prevent deployment issues
+  if (!webhookSecret || !sig) {
+    return new Response("Webhook secret not configured", { status: 400 });
+  }
+
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(body, sig as string, webhookSecret);
+    event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
   } catch (err: unknown) {
     const error = err instanceof Error ? err : new Error(String(err));
     return new Response(`Webhook Error: ${error.message}`, { status: 400 });
