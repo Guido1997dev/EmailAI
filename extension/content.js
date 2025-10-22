@@ -1,6 +1,15 @@
 (function () {
   const SIDEBAR_ID = 'mailsprint-sidebar-container';
-  // Deployed app base URL (no trailing slash). Update after deploying to Vercel.
+  
+  // Detect environment: use localhost for dev, production URL otherwise
+  const API_BASE_URL = (() => {
+    // Check if extension is being used locally (for development)
+    const isDev = chrome.runtime.getURL('').includes('chrome-extension');
+    // Try localhost first (development), fallback to production
+    return 'http://localhost:3000';
+  })();
+  
+  // For opening webapp reference emails page
   const APP_URL = 'https://email-ai-git-main-guido1997devs-projects.vercel.app';
 
   function mountSidebar() {
@@ -158,7 +167,7 @@
           isReply: emailContext.isReply
         };
 
-        const response = await fetch('http://localhost:3001/api/generateMail', {
+        const response = await fetch(`${API_BASE_URL}/api/generateMail`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ context: JSON.stringify(fullContext) })
@@ -346,7 +355,8 @@
   }
 })();
 
-const API_URL = 'http://localhost:3001';
+// Development/local API endpoint
+const API_URL = 'http://localhost:3000';
 
 console.log('🚀 MailSprint content.js loaded!', window.location.href);
 
