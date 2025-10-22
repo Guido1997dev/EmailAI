@@ -11,8 +11,9 @@ export async function POST(req: Request) {
   let event: Stripe.Event;
   try {
     event = stripe.webhooks.constructEvent(body, sig as string, webhookSecret);
-  } catch (err: any) {
-    return new Response(`Webhook Error: ${err.message}`, { status: 400 });
+  } catch (err: unknown) {
+    const error = err instanceof Error ? err : new Error(String(err));
+    return new Response(`Webhook Error: ${error.message}`, { status: 400 });
   }
 
   const supabase = getSupabaseAdminClient();
@@ -31,7 +32,7 @@ export async function POST(req: Request) {
     case "customer.subscription.deleted":
     case "customer.subscription.updated": {
       const subscription = event.data.object as Stripe.Subscription;
-      const customerEmail = (subscription as any).customer_email as string | undefined;
+      const customerEmail = subscription.customer_email as string | undefined;
       if (customerEmail) {
         const { data } = await supabase.auth.admin.listUsers({ page: 1, perPage: 1, email: customerEmail });
         const user = data.users?.[0];

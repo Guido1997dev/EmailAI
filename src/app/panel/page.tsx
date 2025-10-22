@@ -1,18 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 
 export default function PanelPage() {
-  const supabase = getSupabaseBrowserClient();
   const [context, setContext] = useState("");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
   const requestedRef = useRef(false);
 
   useEffect(() => {
-    function onMessage(e: MessageEvent) {
-      const msg = e.data;
+    function onMessage(message: MessageEvent) {
+      const msg = message.data;
       if (msg && msg.type === "MAILSPRINT_CONTEXT" && typeof msg.text === "string") {
         setContext(msg.text);
       }

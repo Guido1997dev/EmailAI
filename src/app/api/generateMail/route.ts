@@ -1,4 +1,3 @@
-import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { openai } from "@/lib/openai";
 
 // CORS headers for Chrome extension
@@ -32,7 +31,7 @@ export async function POST(req: Request) {
       context = String(form.get("context") || "");
     }
 
-    let parsedContext: any = {};
+    let parsedContext: Record<string, unknown> = {};
     try {
       parsedContext = JSON.parse(context);
     } catch {
