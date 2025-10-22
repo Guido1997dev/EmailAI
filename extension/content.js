@@ -1,16 +1,33 @@
 (function () {
   const SIDEBAR_ID = 'mailsprint-sidebar-container';
   
-  // Detect environment: use localhost for dev, production URL otherwise
+  // Detect environment: try localhost first (development), fallback to production
   const API_BASE_URL = (() => {
-    // Check if extension is being used locally (for development)
-    const isDev = chrome.runtime.getURL('').includes('chrome-extension');
-    // Try localhost first (development), fallback to production
+    // Default to localhost for development
     return 'http://localhost:3000';
   })();
   
+  // Production fallback URL
+  const PRODUCTION_URL = 'https://email-ai-git-main-guido1997devs-projects.vercel.app';
+  
+  // Helper function to fetch with fallback
+  async function fetchWithFallback(url, options) {
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response;
+    } catch (error) {
+      // If localhost fails, try production
+      if (url.includes('localhost')) {
+        const prodUrl = url.replace(API_BASE_URL, PRODUCTION_URL);
+        return fetch(prodUrl, options);
+      }
+      throw error;
+    }
+  }
+  
   // For opening webapp reference emails page
-  const APP_URL = 'https://email-ai-git-main-guido1997devs-projects.vercel.app';
+  const APP_URL = PRODUCTION_URL;
 
   function mountSidebar() {
     if (document.getElementById(SIDEBAR_ID)) return;
@@ -167,7 +184,7 @@
           isReply: emailContext.isReply
         };
 
-        const response = await fetch(`${API_BASE_URL}/api/generateMail`, {
+        const response = await fetchWithFallback(`${API_BASE_URL}/api/generateMail`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ context: JSON.stringify(fullContext) })
@@ -445,7 +462,7 @@ function showOverlay(dialog, bodyDiv) {
         threadContext: emailContext.threadContext
       };
 
-      const response = await fetch(`${API_URL}/api/generateMail`, {
+      const response = await fetchWithFallback(`${API_URL}/api/generateMail`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ context: JSON.stringify(fullContext) })
